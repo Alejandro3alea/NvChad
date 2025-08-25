@@ -7,3 +7,6 @@ coc-settings.json
 lazy-lock.json
 after
 **/.DS_Store
+
+# Custom
+lua/custom/themes
