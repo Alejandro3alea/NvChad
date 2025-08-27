@@ -256,7 +256,7 @@ M.lspconfig = {
 
     ["<leader>lf"] = {
       function()
-        vim.diagnostic.open_float { border = "rounded" }
+        vim.diagnostic.open_float { border = "rounded", scope = "line" }
       end,
       "Floating diagnostic",
     },
