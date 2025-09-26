@@ -52,3 +52,8 @@ vim.g.rainbow_delimiters = {
 vim.cmd("highlight RainbowDelimiterYellow  guifg=#ffc912 ctermfg=White")
 vim.cmd("highlight RainbowDelimiterViolet  guifg=#d26ad6 ctermfg=White")
 vim.cmd("highlight RainbowDelimiterBlue  guifg=#179efe ctermfg=White")
+
+
+-- Telescope
+vim.api.nvim_set_hl(0, "TelescopeSelectionCaret", { fg = "#ff79c6" })
+

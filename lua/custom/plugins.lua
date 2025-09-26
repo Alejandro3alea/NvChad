@@ -58,7 +58,7 @@ local plugins = {
     "nvimtools/none-ls.nvim",
     ft = {"python", "c", "cpp"},
     opts = function()
-      return require "custom.configs.null_ls"
+      return require "custom.configs.none_ls"
     end,
   },
   {
@@ -68,13 +68,20 @@ local plugins = {
         -- python
         "black",
         "mypy",
-        "ruff-lsp",
+        "ruff",
         "pyright",
 
         -- cpp
         "clangd",
         "clang-format",
         "codelldb",
+
+        -- lua
+        "lua-language-server",
+
+        -- html
+        "html-lsp",
+        "htmlhint",
       },
     },
   },

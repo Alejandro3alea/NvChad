@@ -15,7 +15,7 @@ end
 
 -- disable semantic tokens
 M.on_init = function(client, _)
-  if not utils.load_config().ui.lsp_semantic_tokens and client.supports_method "textDocument/semanticTokens" then
+  if not utils.load_config().ui.lsp_semantic_tokens and client:supports_method "textDocument/semanticTokens" then
     client.server_capabilities.semanticTokensProvider = nil
   end
 end
@@ -40,28 +40,36 @@ M.capabilities.textDocument.completion.completionItem = {
   },
 }
 
-require("lspconfig").lua_ls.setup {
-  on_init = M.on_init,
-  on_attach = M.on_attach,
-  capabilities = M.capabilities,
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "lua",
+  callback = function()
+    vim.lsp.start({
+      name = "lua_ls",
+      cmd = { "lua-language-server" },
+      root_dir = vim.fs.dirname(vim.fs.find({ ".git", ".luarc.json", ".luarc.jsonc" }, { upward = true })[1]),
+      capabilities = M.capabilities,
+      on_attach = M.on_attach,
+      on_init = M.on_init,
 
-  settings = {
-    Lua = {
-      diagnostics = {
-        globals = { "vim" },
-      },
-      workspace = {
-        library = {
-          [vim.fn.expand "$VIMRUNTIME/lua"] = true,
-          [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
-          [vim.fn.stdpath "data" .. "/lazy/ui/nvchad_types"] = true,
-          [vim.fn.stdpath "data" .. "/lazy/lazy.nvim/lua/lazy"] = true,
+      settings = {
+        Lua = {
+          diagnostics = {
+            globals = { "vim" },
+          },
+          workspace = {
+            library = {
+              [vim.fn.expand "$VIMRUNTIME/lua"] = true,
+              [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
+              [vim.fn.stdpath "data" .. "/lazy/ui/nvchad_types"] = true,
+              [vim.fn.stdpath "data" .. "/lazy/lazy.nvim/lua/lazy"] = true,
+            },
+            maxPreload = 100000,
+            preloadFileSize = 10000,
+          },
         },
-        maxPreload = 100000,
-        preloadFileSize = 10000,
       },
-    },
-  },
-}
+    })
+  end,
+})
 
 return M
