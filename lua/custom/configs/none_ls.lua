@@ -1,5 +1,5 @@
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-local none_ls = require('none-ls')
+local none_ls = require('null-ls')
 
 local opts = {
   sources = {
