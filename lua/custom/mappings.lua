@@ -43,8 +43,8 @@ M.dap = {
     ["]"] = { "c[<C-r>\"]<ESC>", "Wrap selected text with square brackets" },
     ["{"] = { "c{<C-r>\"}<ESC>", "Wrap selected text with curly braces" },
     ["}"] = { "c{<C-r>\"}<ESC>", "Wrap selected text with curly braces" },
-    ["<"] = { "c<<C-r>\"><ESC>", "Wrap selected text with angle brackets" },
-    [">"] = { "c<<C-r>\"><ESC>", "Wrap selected text with angle brackets" },
+    ["<leader><"] = { "c<<C-r>\"><ESC>", "Wrap selected text with angle brackets" },
+    ["<leader>>"] = { "c<<C-r>\"><ESC>", "Wrap selected text with angle brackets" },
   }
 }
 
