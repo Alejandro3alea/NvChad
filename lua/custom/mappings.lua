@@ -33,6 +33,18 @@ M.dap = {
       "<cmd> DapTerminate <CR>",
       "Debugger: Stop",
     }
+  },
+  v = {
+    ["'"] = { "c'<C-r>\"'<ESC>", "Wrap selected text with single quotes" },
+    ["\""] = { "c\"<C-r>\"\"<ESC>", "Wrap selected text with double quotes" },
+    ["("] = { "c(<C-r>\")<ESC>", "Wrap selected text with parentheses" },
+    [")"] = { "c(<C-r>\")<ESC>", "Wrap selected text with parentheses" },
+    ["["] = { "c[<C-r>\"]<ESC>", "Wrap selected text with square brackets" },
+    ["]"] = { "c[<C-r>\"]<ESC>", "Wrap selected text with square brackets" },
+    ["{"] = { "c{<C-r>\"}<ESC>", "Wrap selected text with curly braces" },
+    ["}"] = { "c{<C-r>\"}<ESC>", "Wrap selected text with curly braces" },
+    ["<"] = { "c<<C-r>\"><ESC>", "Wrap selected text with angle brackets" },
+    [">"] = { "c<<C-r>\"><ESC>", "Wrap selected text with angle brackets" },
   }
 }
 
