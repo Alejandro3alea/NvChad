@@ -11,6 +11,7 @@ public:
 };
 
 int main(void) {
+
   int x = 0;
 
   Lol l;

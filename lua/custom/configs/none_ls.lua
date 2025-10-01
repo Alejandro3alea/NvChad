@@ -5,7 +5,7 @@ local opts = {
   sources = {
     -- Python
     none_ls.builtins.formatting.black.with({
-      filetypes = { "python" },
+      filetypes = { "py", "python" },
     }),
     none_ls.builtins.diagnostics.mypy.with({
       extra_args = function(params)

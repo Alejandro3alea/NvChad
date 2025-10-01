@@ -9,7 +9,11 @@ def logger(val: str):
 logger("HELLOO")
 
 
+
+
 class Input:
+
+
     def __init__(self, key: Optional[int]):
         self.key_val: int = key or 0
 
