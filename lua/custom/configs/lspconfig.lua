@@ -11,4 +11,13 @@ vim.lsp.config('*', {
 
 vim.lsp.config("pyright", {
   filetypes = { "py", "python" },
+  settings = {
+    python = {
+      analysis = {
+        extraPaths = { "./" },  -- or use full path like "/home/user/myproject"
+        autoSearchPaths = true,
+        useLibraryCodeForTypes = true,
+      },
+    },
+  },
 })
