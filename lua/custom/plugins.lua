@@ -125,10 +125,12 @@ local plugins = {
 
   -- Code snapshots
   {
-    "SergioRibera/codeshot.nvim",
-    lazy = false,
+    "michaelrommel/nvim-silicon.nvim",
+    lazy = true,
+    cmd = "Silicon",
     config = function()
-      require("codeshot").setup({
+      require("silicon").setup({
+        dont = "JetBrainsMono Nerd Font=34; Noto Color Emoji=34"
         -- config
       })
       output = "CodeShotKABLAMO_${year}-${month}-${date}_${time}.png", -- Auto generate file name based on time (absolute or relative to cwd)

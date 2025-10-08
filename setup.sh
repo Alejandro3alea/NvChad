@@ -17,18 +17,20 @@ else
 fi
 
 
-read -r -p "Setting up sss_code for code screenshots. Do you want to install it? [Y/n] " RESPONSE
+read -r -p "Setting up silicon for code screenshots. Do you want to install it? [Y/n] " RESPONSE
 RESPONSE=${RESPONSE:-Y}
 if [[ "${RESPONSE}" =~ ^([yY][eE][sS]|[yY])$ ]]; then
 
-  SSS_CODE_NAME=sss_code-x86_64-unknown-linux-gnu
-  wget https://github.com/SergioRibera/sss/releases/download/sss_code/v0.2.0/${SSS_CODE_NAME}.tar.xz
-  tar -xf ${SSS_CODE_NAME}.tar.xz && rm ${SSS_CODE_NAME}.tar.xz
-  sudo mv ${SSS_CODE_NAME}/sss_code /usr/local/bin/ && rm -rf ${SSS_CODE_NAME}/
-  sss_code --help
+  # Install cargo
+  curl https://sh.rustup.rs -sSf | sh
+  # Install silicon
+  cargo install silicon
+  # Add cargo-installed binaries to the path
+  export PATH="$PATH:$CARGO_HOME/bin"
+  silicon --help
 
 else
-  echo "Skipping sss_code install..."
+  echo "Skipping silicon install..."
 fi
 
 echo "Setup completed!"
