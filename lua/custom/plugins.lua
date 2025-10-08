@@ -104,5 +104,33 @@ local plugins = {
       vim.cmd.colorscheme("vscode")
     end,
   },
+
+  -- git
+  {
+    "NeogitOrg/neogit",
+    lazy = false,
+    dependencies = {
+      "nvim-lua/plenary.nvim",         -- required
+      "sindrets/diffview.nvim",        -- optional - Diff integration
+
+      -- Only one of these is needed.
+      "nvim-telescope/telescope.nvim", -- optional
+    },
+    config = function ()
+      require("neogit").setup({
+        -- config
+      })
+    end,
+  },
+
+  -- Code snapshots
+  {
+    "niuiic/code-shot.nvim",
+    lazy = false,
+    dependencies = {
+      "Aloxaf/silicon",
+      "niuiic/omega.nvim", -- required dependency
+    },
+  },
 }
 return plugins
