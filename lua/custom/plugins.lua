@@ -125,12 +125,14 @@ local plugins = {
 
   -- Code snapshots
   {
-    "niuiic/code-shot.nvim",
+    "SergioRibera/codeshot.nvim",
     lazy = false,
-    dependencies = {
-      "Aloxaf/silicon",
-      "niuiic/omega.nvim", -- required dependency
-    },
+    config = function()
+      require("codeshot").setup({
+        -- config
+      })
+      output = "CodeShotKABLAMO_${year}-${month}-${date}_${time}.png", -- Auto generate file name based on time (absolute or relative to cwd)
+    end
   },
 }
 return plugins

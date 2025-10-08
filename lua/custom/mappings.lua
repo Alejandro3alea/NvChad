@@ -3,6 +3,31 @@ local M = {}
 M.dap = {
   plugin = true,
   n = {
+
+    -- Common
+    ["<PageUp>"] = {
+      "<C-u>zz",
+      "Page Up + center cursor",
+      opts = { noremap = true, silent = true },
+    },
+    ["<PageDown>"] = {
+      "<C-d>zz",
+      "Page Down + center cursor",
+      opts = { noremap = true, silent = true },
+    },
+
+    ["<C-u>"] = {
+      "<C-u>zz",
+      "Page Up + center cursor",
+      opts = { noremap = true, silent = true },
+    },
+    ["<C-d>"] = {
+      "<C-d>zz",
+      "Page Down + center cursor",
+      opts = { noremap = true, silent = true },
+    },
+
+    -- Dap
     ["<leader>b"] = {
       "<cmd> DapToggleBreakpoint <CR>",
       "Add breakpoint at line",
@@ -33,6 +58,7 @@ M.dap = {
       "<cmd> DapTerminate <CR>",
       "Debugger: Stop",
     }
+
   },
   v = {
     ["'"] = { "c'<C-r>\"'<ESC>", "Wrap selected text with single quotes" },
@@ -45,6 +71,9 @@ M.dap = {
     ["}"] = { "c{<C-r>\"}<ESC>", "Wrap selected text with curly braces" },
     ["<leader><"] = { "c<<C-r>\"><ESC>", "Wrap selected text with angle brackets" },
     ["<leader>>"] = { "c<<C-r>\"><ESC>", "Wrap selected text with angle brackets" },
+
+    ["<leader>ss"] = { "<cmd> SSSelected <CR>", "Take screenshot just of selected lines" },
+    ["<leader>sc"] = { "<cmd> SSSFocused <CR>", "Take screenshot of file and highlight selected lines" },-- Take screenshot just of selected lines
   }
 }
 

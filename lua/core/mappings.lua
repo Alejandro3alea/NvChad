@@ -94,7 +94,7 @@ M.general = {
 
     ["<C-q>"] = { ":qa<cr>", "Quit nvim" },
 
-    ["<leader>s"] = { "<cmd> vsplit <CR>", "Split Tab" },
+    ["<leader>sp"] = { "<cmd> vsplit <CR>", "Split Tab" },
 
     -- ["<leader>mp"] = { "<cmd> MarkdownPreviewToggle <CR>", "Markdown Preview Toggle"}
   },
