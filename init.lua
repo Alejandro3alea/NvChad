@@ -48,6 +48,9 @@ vim.g.rainbow_delimiters = {
     },
 }
 
+-- Comments
+vim.cmd('autocmd FileType * set formatoptions-=cro')
+
 -- VSCode Dark+ rainbow delimiter colors
 vim.cmd("highlight RainbowDelimiterYellow  guifg=#ffc912 ctermfg=White")
 vim.cmd("highlight RainbowDelimiterViolet  guifg=#d26ad6 ctermfg=White")
@@ -57,3 +60,6 @@ vim.cmd("highlight RainbowDelimiterBlue  guifg=#179efe ctermfg=White")
 -- Telescope
 vim.api.nvim_set_hl(0, "TelescopeSelectionCaret", { fg = "#ff79c6" })
 
+vim.schedule(function()
+  require("base46").load_all_highlights()
+end)

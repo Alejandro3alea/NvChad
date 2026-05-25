@@ -130,9 +130,12 @@ local plugins = {
     config = function()
       require("codeshot").setup({
         -- config
+        use_current_theme = true,
+        background = '#FFFFFF00',
+        theme = 'catppuccin',
       })
-      output = "CodeShotKABLAMO_${year}-${month}-${date}_${time}.png", -- Auto generate file name based on time (absolute or relative to cwd)
-    end
+      -- output = "CodeShot_${year}-${month}-${date}_${time}.png", -- Auto generate file name based on time (absolute or relative to cwd)
+    end,
   },
 }
 return plugins
