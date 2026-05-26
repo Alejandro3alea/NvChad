@@ -99,7 +99,7 @@ local plugins = {
     config = function()
       require("vscode").setup({
         -- Optionally enable transparent background    
-        transparent = false,
+        transparent = true,
       })
       vim.cmd.colorscheme("vscode")
     end,
@@ -137,5 +137,40 @@ local plugins = {
       -- output = "CodeShot_${year}-${month}-${date}_${time}.png", -- Auto generate file name based on time (absolute or relative to cwd)
     end,
   },
+
+    -- Leetcode
+    {
+        "kawre/leetcode.nvim",
+        build = ":TSUpdate html", -- if you have `nvim-treesitter` installed
+        lazy = false,
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "MunifTanjim/nui.nvim",
+            "nvim-treesitter/nvim-treesitter",
+        },
+        opts = {
+            lang = "cpp",
+            plugins = {
+                non_standalone = true,
+            },
+        },
+    },
+
+    -- DevContainers
+    {
+        'https://codeberg.org/esensar/nvim-dev-container',
+        dependencies = 'nvim-treesitter/nvim-treesitter',
+        lazy = false,
+        config = function()
+            require("devcontainer").setup({
+                -- mounts setup
+                attach_mounts = {
+                    neovim_config = { enabled = true, options = { "readonly" } },
+                    neovim_data = { enabled = true, options = {} },
+                },
+                nvim_install_as_root = true,
+            })
+        end,
+    }
 }
 return plugins

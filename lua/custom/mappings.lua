@@ -72,8 +72,8 @@ M.dap = {
     ["<leader><"] = { "c<<C-r>\"><ESC>", "Wrap selected text with angle brackets" },
     ["<leader>>"] = { "c<<C-r>\"><ESC>", "Wrap selected text with angle brackets" },
 
-    ["<leader>ss"] = { "<cmd> SSSelected <CR>", "Take screenshot just of selected lines" },
-    ["<leader>sc"] = { "<cmd> SSSFocused <CR>", "Take screenshot of file and highlight selected lines" },-- Take screenshot just of selected lines
+    ["<leader>sc"] = { "<cmd> SSSelected <CR>", "Take screenshot just of selected lines" },
+    ["<leader>ss"] = { "<cmd> SSSFocused <CR>", "Take screenshot of file and highlight selected lines" },-- Take screenshot just of selected lines
   }
 }
 
