@@ -82,6 +82,9 @@ local plugins = {
         -- html
         "html-lsp",
         "htmlhint",
+
+        -- rust
+        "rust-analyzer"
       },
     },
   },

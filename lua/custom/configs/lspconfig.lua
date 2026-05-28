@@ -10,7 +10,7 @@ vim.lsp.config('*', {
   })
 
 vim.lsp.config("pyright", {
-  filetypes = { "py", "python" },
+  filetypes = { "py" },
   settings = {
     python = {
       analysis = {

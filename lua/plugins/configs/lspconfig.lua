@@ -40,6 +40,69 @@ M.capabilities.textDocument.completion.completionItem = {
   },
 }
 
+------------------------------------------
+--  LSP config
+------------------------------------------
+
+-- C++
+vim.api.nvim_create_autocmd("FileType", {
+      pattern = { "c", "cpp", "objc", "objcpp" },
+      callback = function()
+        vim.lsp.start({
+          name = "clangd",
+          cmd = { "clangd" },
+          root_dir = vim.fs.dirname(vim.fs.find({ "compile_commands.json", ".clangd", ".clang-format", ".git" }, { upward = true })[1]),
+          capabilities = M.capabilities,
+          on_attach = M.on_attach,
+          on_init = M.on_init,
+        })
+      end,
+})
+
+
+-- Rust
+vim.api.nvim_create_autocmd("FileType", {
+      pattern = "rust",
+      callback = function()
+        vim.lsp.start({
+          name = "rust_analyzer",
+          cmd = { "rust-analyzer" },
+          root_dir = vim.fs.dirname(vim.fs.find({ "Cargo.toml", ".git" }, { upward = true })[1]),
+          capabilities = M.capabilities,
+          on_attach = M.on_attach,
+          on_init = M.on_init,
+        })
+      end,
+})
+
+
+-- Python
+vim.api.nvim_create_autocmd("FileType", {
+      pattern = "python",
+      callback = function()
+        vim.lsp.start({
+          name = "pyright",
+          cmd = { "pyright-langserver", "--stdio" },
+          root_dir = vim.fs.dirname(vim.fs.find({ "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", ".git" }, { upward = true })[1]),
+          capabilities = M.capabilities,
+          on_attach = M.on_attach,
+          on_init = M.on_init,
+          settings = {
+            python = {
+              analysis = {
+                autoSearchPaths = true,
+                useLibraryCodeForTypes = true,
+                diagnosticMode = "openFilesOnly",
+                extraPaths = { "./" },
+              },
+            },
+          },
+        })
+      end,
+})
+
+
+-- Lua
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "lua",
   callback = function()
@@ -70,6 +133,33 @@ vim.api.nvim_create_autocmd("FileType", {
       },
     })
   end,
+})
+
+
+-- HTML
+vim.api.nvim_create_autocmd("FileType", {
+      pattern = "html",
+      callback = function()
+        vim.lsp.start({
+          name = "html",
+          cmd = { "vscode-html-language-server", "--stdio" },
+          root_dir = vim.fs.dirname(vim.fs.find({ "package.json", ".git" }, { upward = true })[1]),
+          capabilities = M.capabilities,
+          on_attach = M.on_attach,
+          on_init = M.on_init,
+          init_options = {
+            configurationSection = { "html", "css", "javascript" },
+            embeddedLanguages = { css = true, javascript = true },
+            provideFormatter = true,
+          },
+        })
+      end,
+})
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+      callback = function()
+            vim.lsp.buf.format()
+          end,
 })
 
 return M

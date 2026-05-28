@@ -60,6 +60,13 @@ vim.cmd("highlight RainbowDelimiterBlue  guifg=#179efe ctermfg=White")
 -- Telescope
 vim.api.nvim_set_hl(0, "TelescopeSelectionCaret", { fg = "#ff79c6" })
 
+-- filetypes
+vim.filetype.add({
+      extension = {
+        rs = "rust",
+      },
+})
+
 vim.schedule(function()
   require("base46").load_all_highlights()
 end)
