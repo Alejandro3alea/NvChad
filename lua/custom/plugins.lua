@@ -1,145 +1,170 @@
 local plugins = {
-  -- C++
-  {
-    "nvim-neotest/nvim-nio"
-  },
-  {
-    "rcarriga/nvim-dap-ui",
-    event = "VeryLazy",
-    dependencies = "mfussenegger/nvim-dap",
-    config = function()
-      local dap = require("dap")
-      local dapui = require("dapui")
-      dapui.setup()
-      dap.listeners.after.event_initialized["dapui_config"] = function ()
-        dapui.open()
-      end
-      dap.listeners.before.event_terminated["dapui_config"] = function ()
-        dapui.close()
-      end
-      dap.listeners.before.event_exited["dapui_config"] = function ()
-        dapui.close()
-      end
-    end
-  },
-  {
-    "jay-babu/mason-nvim-dap.nvim",
-    event = "VeryLazy",
-    dependencies = {
-      "willamboman/mason.nvim",
-      "mfussenegger/nvim-dap"
+    -- C++
+    {
+        "nvim-neotest/nvim-nio"
     },
-    opts = {
-      handlers = {},
-    }
-  },
-  {
-    "mfussenegger/nvim-dap",
-    config = function (_, _)
-      require("core.utils").load_mappings("dap")
-    end
-  },
-  {
-    "aznhe21/actions-preview.nvim",
-    event = "LspAttach",
-    config = function()
-      require("actions-preview").setup {
-        diff = {
-          algorithm = "patience",
-          ignore_whitespace = true,
+    {
+        "rcarriga/nvim-dap-ui",
+        event = "VeryLazy",
+        dependencies = "mfussenegger/nvim-dap",
+        config = function()
+            local dap = require("dap")
+            local dapui = require("dapui")
+            dapui.setup()
+            dap.listeners.after.event_initialized["dapui_config"] = function()
+                dapui.open()
+            end
+            dap.listeners.before.event_terminated["dapui_config"] = function()
+                dapui.close()
+            end
+            dap.listeners.before.event_exited["dapui_config"] = function()
+                dapui.close()
+            end
+        end
+    },
+    {
+        "jay-babu/mason-nvim-dap.nvim",
+        event = "VeryLazy",
+        dependencies = {
+            "willamboman/mason.nvim",
+            "mfussenegger/nvim-dap"
         },
-      }
-
-    -- Keymap to trigger code actions
-      vim.keymap.set({ "n", "v" }, "<leader>gf", require("actions-preview").code_actions)
-    end,
-  },
-  {
-    "nvimtools/none-ls.nvim",
-    ft = {"python", "c", "cpp"},
-    opts = function()
-      return require "custom.configs.none_ls"
-    end,
-  },
-  {
-    "williamboman/mason.nvim",
-    opts = {
-      ensure_installed = {
-        -- python
-        "black",
-        "mypy",
-        "ruff",
-        "pyright",
-
-        -- cpp
-        "clangd",
-        "clang-format",
-        "codelldb",
-
-        -- lua
-        "lua-language-server",
-
-        -- html
-        "html-lsp",
-        "htmlhint",
-
-        -- rust
-        "rust-analyzer"
-      },
+        opts = {
+            handlers = {},
+        }
     },
-  },
-  {
-    "neovim/nvim-lspconfig",
-    config = function ()
-      require("plugins.configs.lspconfig")
-      require("custom.configs.lspconfig")
-    end,
-  },
-  {
-    "Mofiqul/vscode.nvim",
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require("vscode").setup({
-        -- Optionally enable transparent background    
-        transparent = true,
-      })
-      vim.cmd.colorscheme("vscode")
-    end,
-  },
-
-  -- git
-  {
-    "NeogitOrg/neogit",
-    lazy = false,
-    dependencies = {
-      "nvim-lua/plenary.nvim",         -- required
-      "sindrets/diffview.nvim",        -- optional - Diff integration
-
-      -- Only one of these is needed.
-      "nvim-telescope/telescope.nvim", -- optional
+    {
+        "mfussenegger/nvim-dap",
+        config = function(_, _)
+            require("core.utils").load_mappings("dap")
+        end
     },
-    config = function ()
-      require("neogit").setup({
-        -- config
-      })
-    end,
-  },
+    {
+        "aznhe21/actions-preview.nvim",
+        event = "LspAttach",
+        config = function()
+            require("actions-preview").setup {
+                diff = {
+                    algorithm = "patience",
+                    ignore_whitespace = true,
+                },
+            }
 
-  -- Code snapshots
-  {
-    "SergioRibera/codeshot.nvim",
-    lazy = false,
-    config = function()
-      require("codeshot").setup({
-        -- config
-        use_current_theme = true,
-        background = '#FFFFFF00',
-        theme = 'catppuccin',
-      })
-      -- output = "CodeShot_${year}-${month}-${date}_${time}.png", -- Auto generate file name based on time (absolute or relative to cwd)
-    end,
-  },
+            -- Keymap to trigger code actions
+            vim.keymap.set({ "n", "v" }, "<leader>gf", require("actions-preview").code_actions)
+        end,
+    },
+    -- {
+    --     "nvimtools/none-ls.nvim",
+    --     ft = { "python", "c", "cpp" },
+    --     opts = function()
+    --         return require "custom.configs.none_ls"
+    --     end,
+    -- },
+    {
+        "williamboman/mason.nvim",
+        opts = {
+            ensure_installed = {
+                -- python
+                "black",
+                "mypy",
+                "ruff",
+                "pyright",
+
+                -- cpp
+                "clangd",
+                "clang-format",
+                "codelldb",
+
+                -- lua
+                "lua-language-server",
+
+                -- html
+                "html-lsp",
+                "htmlhint",
+
+                -- rust
+                "rust-analyzer"
+            },
+        },
+    },
+    {
+        "neovim/nvim-lspconfig",
+        config = function()
+            require("plugins.configs.lspconfig")
+            require("custom.configs.lspconfig")
+        end,
+    },
+    {
+        "Mofiqul/vscode.nvim",
+        lazy = false,
+        priority = 1000,
+        config = function()
+            require("vscode").setup({
+                -- Optionally enable transparent background
+                transparent = true,
+            })
+            vim.cmd.colorscheme("vscode")
+        end,
+    },
+    {
+        "Civitasv/cmake-tools.nvim",
+        lazy = false,
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+        },
+        opts = {},
+    },
+    {
+        "j-hui/fidget.nvim",
+        event = "LspAttach",
+        opts = {},
+    },
+    {
+        "norcalli/nvim-colorizer.lua",
+        config = function()
+            require("colorizer").setup({
+                "*",
+                css = { rgb_fn = true },
+            })
+        end,
+    },
+    {
+        "nvim-treesitter/nvim-treesitter-textobjects"
+    },
+
+    -- git
+    {
+        "NeogitOrg/neogit",
+        lazy = false,
+        dependencies = {
+            "nvim-lua/plenary.nvim",  -- required
+            "sindrets/diffview.nvim", -- optional - Diff integration
+
+            -- Only one of these is needed.
+            "nvim-telescope/telescope.nvim", -- optional
+        },
+        config = function()
+            require("neogit").setup({
+                -- config
+            })
+        end,
+    },
+
+    -- Code snapshots
+    {
+        "SergioRibera/codeshot.nvim",
+        lazy = false,
+        config = function()
+            require("codeshot").setup({
+                -- config
+                use_current_theme = true,
+                background = '#FFFFFF00',
+                theme = 'catppuccin',
+            })
+            -- output = "CodeShot_${year}-${month}-${date}_${time}.png", -- Auto generate file name based on time (absolute or relative to cwd)
+        end,
+    },
 
     -- Leetcode
     {
@@ -174,6 +199,20 @@ local plugins = {
                 nvim_install_as_root = true,
             })
         end,
+    },
+
+    -- Notifications
+    {
+        "rcarriga/nvim-notify",
+        config = function()
+            vim.notify = require("notify")
+        end
+    },
+
+    -- Fun
+    {
+        "ThePrimeagen/vim-be-good",
+        lazy = false,
     }
 }
 return plugins
