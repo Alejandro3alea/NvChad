@@ -107,19 +107,38 @@ local plugins = {
             vim.cmd.colorscheme("vscode")
         end,
     },
+
+    -- C++ / cmake
     {
         "Civitasv/cmake-tools.nvim",
+        -- @TODO - Change auto load to load when necessary.
         lazy = false,
         dependencies = {
             "nvim-lua/plenary.nvim",
         },
+        opts = {
+            cmake_build_directory = "build"
+        },
+    },
+    {
+        "utilyre/barbecue.nvim",
+        name = "barbecue",
+        version = "*",
+        event = "LspAttach",
+        dependencies = {
+            "SmiteshP/nvim-navic",
+            "nvim-tree/nvim-web-devicons",
+        },
         opts = {},
     },
+
     {
         "j-hui/fidget.nvim",
         event = "LspAttach",
         opts = {},
     },
+
+    -- UI
     {
         "norcalli/nvim-colorizer.lua",
         config = function()
@@ -130,13 +149,19 @@ local plugins = {
         end,
     },
     {
-        "nvim-treesitter/nvim-treesitter-textobjects"
+        "nvim-treesitter/nvim-treesitter-textobjects",
+        dependencies = "nvim-treesitter/nvim-treesitter",
+        event = "BufReadPost",
     },
+    require("plugins.UI.noice"),
+
+    -- UX
+    require("plugins.UX.tabout"),
 
     -- git
     {
         "NeogitOrg/neogit",
-        lazy = false,
+        cmd = { "Neogit" },
         dependencies = {
             "nvim-lua/plenary.nvim",  -- required
             "sindrets/diffview.nvim", -- optional - Diff integration
@@ -150,6 +175,7 @@ local plugins = {
             })
         end,
     },
+    require("plugins.utils.lazygit"),
 
     -- Code snapshots
     {
@@ -188,7 +214,8 @@ local plugins = {
     {
         'https://codeberg.org/esensar/nvim-dev-container',
         dependencies = 'nvim-treesitter/nvim-treesitter',
-        lazy = false,
+        -- @TODO - improve this loading config
+        cmd = { "Devcontainer" },
         config = function()
             require("devcontainer").setup({
                 -- mounts setup

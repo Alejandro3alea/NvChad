@@ -3,6 +3,7 @@ require "nvchad.lsp"
 
 local M = {}
 local utils = require "core.utils"
+local navic = require("nvim-navic")
 
 -- export on_attach & capabilities for custom lspconfigs
 M.on_attach = function(client, bufnr)
@@ -10,6 +11,9 @@ M.on_attach = function(client, bufnr)
 
     if client.server_capabilities.signatureHelpProvider then
         require("nvchad.signature").setup(client)
+    end
+    if client.server_capabilities.documentSymbolProvider then
+        navic.attach(client, bufnr) -- add this
     end
 end
 
