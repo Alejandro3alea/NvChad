@@ -4,42 +4,6 @@ local plugins = {
         "nvim-neotest/nvim-nio"
     },
     {
-        "rcarriga/nvim-dap-ui",
-        event = "VeryLazy",
-        dependencies = "mfussenegger/nvim-dap",
-        config = function()
-            local dap = require("dap")
-            local dapui = require("dapui")
-            dapui.setup()
-            dap.listeners.after.event_initialized["dapui_config"] = function()
-                dapui.open()
-            end
-            dap.listeners.before.event_terminated["dapui_config"] = function()
-                dapui.close()
-            end
-            dap.listeners.before.event_exited["dapui_config"] = function()
-                dapui.close()
-            end
-        end
-    },
-    {
-        "jay-babu/mason-nvim-dap.nvim",
-        event = "VeryLazy",
-        dependencies = {
-            "willamboman/mason.nvim",
-            "mfussenegger/nvim-dap"
-        },
-        opts = {
-            handlers = {},
-        }
-    },
-    {
-        "mfussenegger/nvim-dap",
-        config = function(_, _)
-            require("core.utils").load_mappings("dap")
-        end
-    },
-    {
         "aznhe21/actions-preview.nvim",
         event = "LspAttach",
         config = function()
@@ -109,17 +73,7 @@ local plugins = {
     },
 
     -- C++ / cmake
-    {
-        "Civitasv/cmake-tools.nvim",
-        -- @TODO - Change auto load to load when necessary.
-        lazy = false,
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-        },
-        opts = {
-            cmake_build_directory = "build"
-        },
-    },
+    require("plugins.cpp.cmake"),
     {
         "utilyre/barbecue.nvim",
         name = "barbecue",
@@ -138,6 +92,10 @@ local plugins = {
         opts = {},
     },
 
+    require("plugins.debugging.dap.dap"),
+    require("plugins.debugging.dap.ui"),
+    require("plugins.debugging.dap.mason-dap"),
+
     -- UI
     {
         "norcalli/nvim-colorizer.lua",
@@ -154,6 +112,7 @@ local plugins = {
         event = "BufReadPost",
     },
     require("plugins.UI.noice"),
+    require("plugins.UI.alpha"),
 
     -- UX
     require("plugins.UX.tabout"),
@@ -196,7 +155,7 @@ local plugins = {
     {
         "kawre/leetcode.nvim",
         build = ":TSUpdate html", -- if you have `nvim-treesitter` installed
-        lazy = false,
+        cmd = "Leetcode",
         dependencies = {
             "nvim-lua/plenary.nvim",
             "MunifTanjim/nui.nvim",
@@ -239,7 +198,7 @@ local plugins = {
     -- Fun
     {
         "ThePrimeagen/vim-be-good",
-        lazy = false,
+        cmd = "VimBeGood"
     }
 }
 return plugins

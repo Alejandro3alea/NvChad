@@ -30,7 +30,11 @@ M.dap = {
             "Go back to previous cursor position",
             opts = { noremap = true, silent = true },
         },
-
+        ["<C-a>"] = {
+            "ggVG",
+            "Select all",
+            opts = { noremap = true, silent = true },
+        },
 
         -- Dap
         ["<leader>b"] = {
