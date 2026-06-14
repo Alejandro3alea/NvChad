@@ -162,6 +162,107 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
+-- Bash
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "sh", "bash" },
+    callback = function()
+        vim.lsp.start({
+            name = "bashls",
+            cmd = { "bash-language-server", "start" },
+            root_dir = vim.fs.dirname(vim.fs.find({ ".git" }, { upward = true })[1]),
+            capabilities = M.capabilities,
+            on_attach = M.on_attach,
+            on_init = M.on_init,
+        })
+    end,
+})
+
+-- Go
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "go",
+    callback = function()
+        vim.lsp.start({
+            name = "gopls",
+            cmd = { "gopls" },
+            root_dir = vim.fs.dirname(vim.fs.find({ "go.mod", "go.work", ".git" }, { upward = true })[1]),
+            capabilities = M.capabilities,
+            on_attach = M.on_attach,
+            on_init = M.on_init,
+        })
+    end,
+})
+
+-- TypeScript/JavaScript
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+    callback = function()
+        vim.lsp.start({
+            name = "ts_ls",
+            cmd = { "typescript-language-server", "--stdio" },
+            root_dir = vim.fs.dirname(vim.fs.find({ "package.json", "tsconfig.json", ".git" }, { upward = true })[1]),
+            capabilities = M.capabilities,
+            on_attach = M.on_attach,
+            on_init = M.on_init,
+        })
+    end,
+})
+
+-- JSON
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "json",
+    callback = function()
+        vim.lsp.start({
+            name = "jsonls",
+            cmd = { "vscode-json-language-server", "--stdio" },
+            root_dir = vim.fs.dirname(vim.fs.find({ "package.json", ".git" }, { upward = true })[1]),
+            capabilities = M.capabilities,
+            on_attach = M.on_attach,
+            on_init = M.on_init,
+            settings = {
+                json = {
+                    schemas = require("schemastore").json.schemas(),
+                    validate = { enable = true },
+                },
+            },
+        })
+    end,
+})
+
+-- YAML
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "yaml",
+    callback = function()
+        vim.lsp.start({
+            name = "yamlls",
+            cmd = { "yaml-language-server", "--stdio" },
+            root_dir = vim.fs.dirname(vim.fs.find({ ".git" }, { upward = true })[1]),
+            capabilities = M.capabilities,
+            on_attach = M.on_attach,
+            on_init = M.on_init,
+            settings = {
+                yaml = {
+                    schemaStore = { enable = true },
+                },
+            },
+        })
+    end,
+})
+
+-- Markdown
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "markdown",
+    callback = function()
+        vim.lsp.start({
+            name = "marksman",
+            cmd = { "marksman", "server" },
+            root_dir = vim.fs.dirname(vim.fs.find({ ".git", ".marksman.toml" }, { upward = true })[1]),
+            capabilities = M.capabilities,
+            on_attach = M.on_attach,
+            on_init = M.on_init,
+        })
+    end,
+})
+
 vim.api.nvim_create_autocmd("BufWritePre", {
     callback = function()
         vim.lsp.buf.format()

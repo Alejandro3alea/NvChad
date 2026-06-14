@@ -76,6 +76,17 @@ vim.api.nvim_create_autocmd("BufWritePost", {
     end,
 })
 
+vim.diagnostic.config({
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = "✘",
+            [vim.diagnostic.severity.WARN]  = "▲",
+            [vim.diagnostic.severity.HINT]  = "⚑",
+            [vim.diagnostic.severity.INFO]  = "»",
+        },
+    },
+})
+
 vim.schedule(function()
     require("base46").load_all_highlights()
 end)

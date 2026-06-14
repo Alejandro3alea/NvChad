@@ -40,6 +40,9 @@ local plugins = {
                 "clang-format",
                 "codelldb",
 
+                -- rust
+                "rust-analyzer",
+
                 -- lua
                 "lua-language-server",
 
@@ -47,8 +50,35 @@ local plugins = {
                 "html-lsp",
                 "htmlhint",
 
-                -- rust
-                "rust-analyzer"
+                -- JS/TS
+                "eslint-lsp",                 -- JS/TS linter
+                "prettier",                   -- JS/HTML/CSS formatter
+                "typescript-language-server", -- JS/TS LSP
+
+                -- css
+                "stylelint",
+
+                -- go
+                "gofumpt",       -- formatter
+                "golangci-lint", -- linter
+                "gopls",         -- LSP
+
+                -- json
+                "json-lsp",
+
+                -- yaml
+                "yaml-language-server",
+
+                -- bash
+                "bash-language-server", -- LSP
+                "shellcheck",           -- linter
+                "shfmt",                -- formatter
+
+                -- .env
+                "dotenv-linter",
+
+                -- md
+                "marksman",
             },
         },
     },
@@ -92,6 +122,13 @@ local plugins = {
         opts = {},
     },
 
+    -- JS/TS/HTML
+    {
+        "b0o/schemastore.nvim",
+        ft = { "ts", "js", "javascript", "typescript", "javascriptreact", "typescriptreact" },
+    },
+
+    -- Debugging
     require("plugins.debugging.dap.dap"),
     require("plugins.debugging.dap.ui"),
     require("plugins.debugging.dap.mason-dap"),
@@ -112,10 +149,23 @@ local plugins = {
         event = "BufReadPost",
     },
     require("plugins.UI.noice"),
-    require("plugins.UI.alpha"),
+    require("plugins.UI.dashboard"),
 
     -- UX
     require("plugins.UX.tabout"),
+    -- {
+    --     "ziontee113/icon-picker.nvim",
+    --     lazy = false,
+    --     config = function()
+    --         require("icon-picker").setup({ disable_legacy_commands = true })
+    --
+    --         local opts = { noremap = true, silent = true }
+    --
+    --         vim.keymap.set("n", "<Leader>i", "<cmd>IconPickerNormal<cr>", opts)
+    --         vim.keymap.set("n", "<Leader>y", "<cmd>IconPickerYank<cr>", opts) --> Yank the selected icon into register
+    --         vim.keymap.set("i", "<C-i>", "<cmd>IconPickerInsert<cr>", opts)
+    --     end
+    -- },
 
     -- git
     {
@@ -155,7 +205,7 @@ local plugins = {
     {
         "kawre/leetcode.nvim",
         build = ":TSUpdate html", -- if you have `nvim-treesitter` installed
-        cmd = "Leetcode",
+        cmd = "Leet",
         dependencies = {
             "nvim-lua/plenary.nvim",
             "MunifTanjim/nui.nvim",
