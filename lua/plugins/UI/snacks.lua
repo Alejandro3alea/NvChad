@@ -34,7 +34,7 @@ return {
                 -- weekend
                 local days_until_monday = 8 - day -- days remaining until Monday
                 local minutes_until_monday = days_until_monday * 24 * 60 - current_minutes
-                return string.format("🎉 Escaped — %dh %dm until cycle reset", math.floor(minutes_until_monday / 60),
+                return string.format("🚬🗿 Escaped — %dh %dm until cycle reset", math.floor(minutes_until_monday / 60),
                     minutes_until_monday % 60)
             end
         end
@@ -73,12 +73,11 @@ return {
                         { action = ":qa", icon = "󰩈", desc = "Quit", key = "q" },
                     },
                     header = [[
-                     ▐ ▄ ▄▄▄ .       ▌ ▐·▪  • ▌ ▄ ·.
-                     •█▌▐█▀▄.▀· ▄█▀▄ ▪█·█▌██ ·██ ▐███▪
-                     ▐█▐▐▌▐▀▀▪▄▐█▌.▐▌▐█▐█•▐█·▐█ ▌▐▌▐█·
-                     ██▐█▌▐█▄▄▌▐█▌.▐▌ ███ ▐█▌██ ██▌▐█▌
-                     ▀▀ █▪ ▀▀▀  ▀█▄▀▪. ▀  ▀▀▀▀▀  █▪▀▀▀
-                     ]]
+       ▐ ▄ ▄▄▄ .       ▌ ▐·▪  • ▌ ▄ ·.
+       •█▌▐█▀▄.▀· ▄█▀▄ ▪█·█▌██ ·██ ▐███▪
+       ▐█▐▐▌▐▀▀▪▄▐█▌.▐▌▐█▐█•▐█·▐█ ▌▐▌▐█·
+       ██▐█▌▐█▄▄▌▐█▌.▐▌ ███ ▐█▌██ ██▌▐█▌
+       ▀▀ █▪ ▀▀▀  ▀█▄▀▪. ▀  ▀▀▀▀▀  █▪▀▀▀  ]]
                 },
                 sections = {
                     {
@@ -87,13 +86,16 @@ return {
                         width = 90,
                         pane = 1,
                         padding = 1,
+                        align = "left"
                     },
                     {
                         section = "terminal",
-                        cmd = "~/.config/nvim/scripts/header.sh " .. random_header(),
+                        cmd = "chafa --format symbols --symbols vhalf --size 45x20 --stretch --colors full " ..
+                            random_header(),
                         height = 20,
                         width = 45,
                         padding = 1,
+                        align = "center",
                     },
                     {
                         pane = 2,
@@ -108,7 +110,7 @@ return {
                         { text = "-------------------------------------------------------------", gap = 1, padding = 1 },
                     },
                     { pane = 2, icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
-                    { section = "startup" },
+                    { section = "startup", align = "left" },
                 },
             },
         }
