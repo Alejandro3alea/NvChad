@@ -149,7 +149,7 @@ local plugins = {
         event = "BufReadPost",
     },
     require("plugins.UI.noice"),
-    require("plugins.UI.dashboard"),
+    require("plugins.UI.snacks"),
 
     -- UX
     require("plugins.UX.tabout"),
