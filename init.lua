@@ -87,6 +87,12 @@ vim.diagnostic.config({
     },
 })
 
+local original_notify = vim.notify
+vim.notify = function(msg, level, opts)
+    if msg:find("str_utfindex") then return end
+    original_notify(msg, level, opts)
+end
+
 vim.schedule(function()
     require("base46").load_all_highlights()
 end)

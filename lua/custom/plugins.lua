@@ -26,61 +26,51 @@ local plugins = {
     --     end,
     -- },
     {
-        "williamboman/mason.nvim",
+        "mason-org/mason.nvim",
+        opts = {
+        },
+    },
+    {
+        "WhoIsSethDaniel/mason-tool-installer.nvim",
+        dependencies = { "mason-org/mason.nvim" },
         opts = {
             ensure_installed = {
                 -- python
-                "black",
-                "mypy",
-                "ruff",
-                "pyright",
-
+                "black", "mypy", "ruff", "pyright",
                 -- cpp
-                "clangd",
-                "clang-format",
-                "codelldb",
-
+                "clangd", "clang-format", "codelldb",
                 -- rust
                 "rust-analyzer",
-
                 -- lua
                 "lua-language-server",
-
                 -- html
-                "html-lsp",
-                "htmlhint",
-
+                "html-lsp", "htmlhint",
                 -- JS/TS
-                "eslint-lsp",                 -- JS/TS linter
-                "prettier",                   -- JS/HTML/CSS formatter
-                "typescript-language-server", -- JS/TS LSP
-
+                "eslint-lsp", "prettier", "typescript-language-server",
                 -- css
                 "stylelint",
-
                 -- go
-                "gofumpt",       -- formatter
-                "golangci-lint", -- linter
-                "gopls",         -- LSP
-
+                "gofumpt", "golangci-lint", "gopls",
                 -- json
                 "json-lsp",
-
                 -- yaml
                 "yaml-language-server",
-
                 -- bash
-                "bash-language-server", -- LSP
-                "shellcheck",           -- linter
-                "shfmt",                -- formatter
-
-                -- .env
-                "dotenv-linter",
-
-                -- md
-                "marksman",
+                "bash-language-server", "shellcheck", "shfmt",
+                -- env/md
+                "dotenv-linter", "marksman",
             },
+            auto_update = false,
+            run_on_start = true,
         },
+    },
+    {
+        "mason-org/mason-lspconfig.nvim",
+        dependencies = {
+            "mason-org/mason.nvim",
+            "neovim/nvim-lspconfig",
+        },
+        opts = {},
     },
     {
         "neovim/nvim-lspconfig",
@@ -135,7 +125,7 @@ local plugins = {
 
     -- UI
     {
-        "norcalli/nvim-colorizer.lua",
+        "catgoose/nvim-colorizer.lua",
         config = function()
             require("colorizer").setup({
                 "*",
@@ -152,7 +142,7 @@ local plugins = {
     require("plugins.UI.snacks"),
 
     -- UX
-    require("plugins.UX.tabout"),
+    -- require("plugins.UX.tabout"),
     -- {
     --     "ziontee113/icon-picker.nvim",
     --     lazy = false,
@@ -168,22 +158,6 @@ local plugins = {
     -- },
 
     -- git
-    {
-        "NeogitOrg/neogit",
-        cmd = { "Neogit" },
-        dependencies = {
-            "nvim-lua/plenary.nvim",  -- required
-            "sindrets/diffview.nvim", -- optional - Diff integration
-
-            -- Only one of these is needed.
-            "nvim-telescope/telescope.nvim", -- optional
-        },
-        config = function()
-            require("neogit").setup({
-                -- config
-            })
-        end,
-    },
     require("plugins.utils.lazygit"),
 
     -- Code snapshots
