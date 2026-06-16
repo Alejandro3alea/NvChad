@@ -27,7 +27,7 @@ return {
                 local end_of_cycle = 18 * 60 -- 18:00
                 local remaining = end_of_cycle - current_minutes + (5 - day) * 24 * 60
                 return header_start ..
-                    string.format("⏰ Stuck in Time Loop — %dh %dm until escape.", math.floor(remaining / 60),
+                    string.format("⌛ Stuck in Time Loop — %dh %dm until escape.", math.floor(remaining / 60),
                         remaining % 60) ..
                     header_end
             else
